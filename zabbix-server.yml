@@ -1,0 +1,26 @@
+- hosts: 'zabbix_server'
+  become: true
+  tasks:
+    - name: 'Download Zabbix repository'
+      uri: 'https://repo.zabbix.com/zabbix/5.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_5.0-1+xenial_all.deb'
+      dest: '/tmp/zabbix_repo.deb'
+      force: false
+
+    - name: 'Install Zabbix repo from deb file'
+      apt:
+        deb: '/tmp/zabbix_repo.deb'
+        state: 'present'
+
+    - name: 'Install Zabbix server'
+      apt:
+        name: 'zabbix-server-mysql'
+        state: 'present'
+      notify: 'zabbix-server service start'
+  handlers:
+    - name: 'zabbix-server service start'
+      service:
+        name: 'zabbix-server'
+        enabled: false
+        state: started
+        become: true
+
