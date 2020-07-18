@@ -16,12 +16,13 @@
       apt:
         name: 'zabbix-server-{{ DB_engine }}'
         state: 'present'
-      notify: 'zabbix-server service start'
+      notify: 'start server'
+
   handlers:
     - name: 'zabbix-server service start'
+      listen: 'start server'
       service:
         name: 'zabbix-server'
         enabled: false
         state: started
-        become: true
-
+      become: true

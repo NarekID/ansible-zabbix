@@ -16,13 +16,14 @@
       apt:
         name: 'zabbix-agent'
         state: 'present'
-      notify: 'zabbix-agent service start'
+      notify: 'agent start'
 
   handlers:
     - name: 'zabbix-agent service start'
+      listen: 'agent start'
       service:
         name: 'zabbix-agent'
         enabled: false
         state: started
-        become: true
+      become: true
 
