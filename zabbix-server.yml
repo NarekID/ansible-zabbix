@@ -12,9 +12,9 @@
         deb: '/tmp/zabbix_repo_v{{ zabbix_version }}.deb'
         state: 'present'
 
-    - name: 'Install Zabbix server'
+    - name: 'Install Zabbix server with {{ DB_engine }} DB'
       apt:
-        name: 'zabbix-server-mysql'
+        name: 'zabbix-server-{{ DB_engine }}'
         state: 'present'
       notify: 'zabbix-server service start'
   handlers:

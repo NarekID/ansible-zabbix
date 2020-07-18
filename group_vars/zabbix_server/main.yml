@@ -1,1 +1,2 @@
 ansible-user: 'narekid'
+DB_engine: 'mysql'
