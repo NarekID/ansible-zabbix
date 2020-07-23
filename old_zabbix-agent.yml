@@ -1,0 +1,29 @@
+- hosts: 'zabbix_agent'
+  become: true
+  tasks:
+    - name: 'Download Zabbix v{{ zabbix_version }} repository'
+      uri:
+        url: 'https://repo.zabbix.com/zabbix/{{ zabbix_version }}/{{ ansible_distribution | lower }}/pool/main/z/zabbix-release/zabbix-release_{{ zabbix_version }}-1+{{ ansible_distribution_release }}_all.deb'
+        dest: '/tmp/zabbix_repo_v{{ zabbix_version }}.deb'
+        force: false
+
+    - name: 'Install Zabbix repo from deb file'
+      apt:
+        deb: '/tmp/zabbix_repo_v{{ zabbix_version }}.deb'
+        state: 'present'
+
+    - name: 'Install Zabbix agent'
+      apt:
+        name: 'zabbix-agent'
+        state: 'present'
+      notify: 'agent start'
+
+  handlers:
+    - name: 'zabbix-agent service start'
+      listen: 'agent start'
+      service:
+        name: 'zabbix-agent'
+        enabled: false
+        state: started
+      become: true
+
