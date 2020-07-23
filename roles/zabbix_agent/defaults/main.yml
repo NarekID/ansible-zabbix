@@ -1,0 +1,6 @@
+---
+# defaults file for zabbix_agent
+zabbix_agent_ansible_user: 'narekid_vm'
+zabbix_agent_ansible_host: '192.168.100.8'
+zabbix_agent_zabbix_version: 5.0
+zabbix_agent_deb_destination: '/tmp/zabbix_repo_v{{ zabbix_version }}.deb'

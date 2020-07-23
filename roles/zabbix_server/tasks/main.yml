@@ -1,0 +1,18 @@
+---
+# tasks file for zabbix_server
+- name: 'Download Zabbix v{{ zabbix_version }} repository'
+  uri:
+    url: 'https://repo.zabbix.com/zabbix/{{ zabbix_version }}/{{ ansible_distribution | lower }}/pool/main/z/zabbix-release/zabbix-release_{{ zabbix_version }}-1+{{ ansible_distribution_release }}_all.deb'
+    dest: '{{ deb_destination }}'
+    force: false
+
+- name: 'Install Zabbix repo from deb file'
+  apt:
+    deb: '{{ deb_destination }}'
+    state: 'present'
+
+- name: 'Install Zabbix server with {{ DB_engine | upper }} DB'
+  apt:
+    name: 'zabbix-server-{{ DB_engine }}'
+    state: 'present'
+  notify: 'start server'

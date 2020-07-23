@@ -1,0 +1,9 @@
+---
+# defaults file for zabbix_server
+ansible_user: 'narekid'
+ansible_host: 192.168.100.6
+zabbix_version: 5.0
+deb_destination: '/tmp/zabbix_repo_v{{ zabbix_version }}.deb'
+DB_engine: 'mysql'
+# DB_engine: 'pgsql'
+

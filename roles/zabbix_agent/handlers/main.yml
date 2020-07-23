@@ -1,0 +1,9 @@
+---
+# handlers file for zabbix_agent
+- name: 'zabbix-agent service start'
+  listen: 'start agent'
+  service:
+    name: 'zabbix-agent'
+    enabled: false
+    state: 'started'
+  become: true
