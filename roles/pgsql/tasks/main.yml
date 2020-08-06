@@ -1,0 +1,8 @@
+---
+# tasks file for pgsql
+- name: 'Install PostgreSQL DB'
+  apt:
+    name: 'postgresql'
+    update_cache: true
+    state: 'present'
+  notify: 'start pgsql'

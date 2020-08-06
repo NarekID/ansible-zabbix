@@ -1,0 +1,9 @@
+---
+# handlers file for mysql
+- name: 'MYSQL service start'
+  listen: 'start mysql'
+  service:
+    name: 'mysql-server'
+    enabled: false
+    state: 'started'
+  become: true

@@ -11,6 +11,9 @@
     deb: '{{ deb_destination }}'
     state: 'present'
 
+- include_role:
+    name: '{{ DB_engine }}'    
+
 - name: 'Install Zabbix server with {{ DB_engine | upper }} DB'
   apt:
     name: 'zabbix-server-{{ DB_engine }}'
